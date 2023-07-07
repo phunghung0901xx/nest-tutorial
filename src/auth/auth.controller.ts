@@ -2,7 +2,7 @@ import { Controller, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 
 @Controller('auth')
-class AppController {
+export class AuthController {
   
     constructor(private authSerivce: AuthService) {
 
@@ -18,4 +18,3 @@ class AppController {
         return this.authSerivce.login
     }
 }
-export class AuthController {}
