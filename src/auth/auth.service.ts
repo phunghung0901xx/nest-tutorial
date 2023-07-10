@@ -10,7 +10,23 @@ export class AuthService {
     constructor(private prismaService: PrismaService) {
         
     }
-    register() {
+   async register(authDTO : AuthDTO) {
+
+        const hashedPassword = await argon.hash(authDTO.password)
+
+        const user = await  this.prismaService.create({
+            data: {
+                email: authDTO.email,
+                hashedPassword: hashedPassword,
+                fristName: '',
+                lastName: '',
+            },
+            select: {
+                id:true,
+                email:true,
+                createdAt: true,
+            }
+        })
         return {
             message: "Register an user"
         }
